@@ -1,13 +1,15 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
-
+server '45.55.146.91', :user=>[:app, :web, :db]
 set :application, 'colorfunds'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :repo_url, 'git@github.com:Colorfunds/colorfunds.git'
 set :user, 'root'
-
 set :pty,             true
 set :use_sudo,        false
-set :stage,           :production
+set :stages, ["staging", "development", "production"]
+set :stage, "development"
+set :branch,        :master
+set :scm,           :git
 set :deploy_via,      :remote_cache
 set :deploy_to,       "/var/www/#{fetch(:application)}"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
@@ -19,9 +21,9 @@ set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh
 # set :log_level,     :debug
 # set :keep_releases, 5
 
-## Linked Files & Directories (Default None):
-# set :linked_files, %w{config/database.yml}
-# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+#Linked Files & Directories (Default None):
+#set :linked_files, %w{config/database.yml}
+#set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 
 # Default branch is :master
@@ -43,7 +45,7 @@ set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh
 # set :pty, true
 
 # Default value for :linked_files is []
-# set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+#set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
